@@ -27,3 +27,4 @@ go mod tidy
 ```
 go run main.go
 ```
+#### It will listen to address http://localhost:8080/ or you can open Swagger docs page on http://localhost:8080/swagger/index.html
