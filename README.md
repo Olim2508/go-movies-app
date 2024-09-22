@@ -2,6 +2,14 @@
 
 A simple web application built using the **Gin** framework and **PostgreSQL**.
 
+## Used tools
+* Gin web framework
+* Swagger for API docs
+* ORM -> Gorm
+* Migrations -> Goose
+* Swagger
+* PostgreSQL
+
 ## How to Run
 
 1. **Clone the repository:**
