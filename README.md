@@ -69,3 +69,11 @@ goose -dir ./db/migrations postgres "user=postgres password=postgres dbname=movi
 ```
 
 To learn more about goose, you can visit its [docs](https://github.com/pressly/goose?tab=readme-ov-file)
+
+
+**Other Notes**
+
+After adding new apis, you should update swagger docs, so that they appear in the swagger docs using this command:
+```
+swag init
+```

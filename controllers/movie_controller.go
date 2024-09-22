@@ -58,3 +58,36 @@ func GetMovieByID(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, movie)
 }
+
+// CreateGenre godoc
+// @Summary Create a new genre
+// @Description Add a new movie to the database
+// @Tags genres
+// @Accept json
+// @Produce json
+// @Param movie body models.Genre true "Genre Data"
+// @Success 200 {object} models.Genre
+// @Failure 400 {object} map[string]interface{}
+// @Router /genres [post]
+func CreateGenre(c *gin.Context) {
+	var genre models.Genre
+	if err := c.ShouldBindJSON(&genre); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
+	database.DB.Create(&genre)
+	c.JSON(http.StatusOK, genre)
+}
+
+// GetGenres godoc
+// @Summary Get all genres
+// @Description Get a list of all genres in the database
+// @Tags genres
+// @Produce json
+// @Success 200 {array} models.Genre
+// @Router /genres [get]
+func GetGenres(c *gin.Context) {
+	var genres []models.Genre
+	database.DB.Find(&genres)
+	c.JSON(http.StatusOK, genres)
+}

@@ -1,11 +1,11 @@
 -- +goose Up
 -- +goose StatementBegin
-CREATE TABLE directors (
+CREATE TABLE IF NOT EXISTS directors (
                            id SERIAL PRIMARY KEY,
                            name VARCHAR(255) NOT NULL,
                            age INT NOT NULL
 );
-CREATE TABLE movies (
+CREATE TABLE IF NOT EXISTS movies (
                         id SERIAL PRIMARY KEY,
                         title VARCHAR(255) NOT NULL,
                         rating INT NOT NULL,

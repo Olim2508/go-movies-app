@@ -9,7 +9,16 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "name": "API Support",
+            "url": "http://www.swagger.io/support",
+            "email": "support@swagger.io"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -65,6 +74,68 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/models.Director"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/genres": {
+            "get": {
+                "description": "Get a list of all genres in the database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Get all genres",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Genre"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Add a new movie to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "genres"
+                ],
+                "summary": "Create a new genre",
+                "parameters": [
+                    {
+                        "description": "Genre Data",
+                        "name": "movie",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Genre"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Genre"
                         }
                     },
                     "400": {
@@ -191,6 +262,17 @@ const docTemplate = `{
                 }
             }
         },
+        "models.Genre": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
         "models.Movie": {
             "type": "object",
             "properties": {
@@ -198,6 +280,12 @@ const docTemplate = `{
                     "$ref": "#/definitions/models.Director"
                 },
                 "director_id": {
+                    "type": "integer"
+                },
+                "genre": {
+                    "$ref": "#/definitions/models.Genre"
+                },
+                "genre_id": {
                     "type": "integer"
                 },
                 "id": {
@@ -216,12 +304,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
+	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "Movie API",
+	Description:      "A simple Movie and Director API",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

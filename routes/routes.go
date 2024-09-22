@@ -11,6 +11,10 @@ func SetupRoutes(router *gin.Engine) {
 	router.GET("/movies", controllers.GetMovies)
 	router.GET("/movies/:id", controllers.GetMovieByID)
 
+	// Genre routes
+	router.POST("/genres", controllers.CreateGenre)
+	router.GET("/genres", controllers.GetGenres)
+
 	// Director routes
 	router.POST("/directors", controllers.CreateDirector)
 	router.GET("/directors", controllers.GetDirectors)
